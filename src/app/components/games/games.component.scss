@@ -1,0 +1,59 @@
+//@use "@material/image-list";
+//
+//.my-image-list {
+//  @include image-list.standard-columns(5);
+//}
+//
+//@media (max-width: 599px) {
+//  .my-image-list {
+//    @include image-list.standard-columns(3);
+//  }
+//}
+//.my-masonry-image-list {
+//  @include image-list.masonry-columns(5);
+//}
+//
+//@media screen and (max-width: 767px) {
+//  mat-grid-list {
+//    columns: 10;
+//  }
+//}
+//
+//@media screen and (max-width: 575px) {
+//  mat-grid-list {
+//    columns: 3;
+//  }
+//}
+
+.games-box {
+  .game-box {
+    opacity: 0.9;
+    transition: 0.3s ease;
+    cursor: pointer;
+    //background-color: rgba(60,148,251,0.98);
+
+      .view-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+
+        .game-name {
+          text-align: center;
+          //position: relative;
+          //font-size: medium;
+          //top: 35%;
+      }
+    }
+  }
+
+  .game-box:hover {
+    opacity: 1;
+    transform: scale(1.5, 1.5);
+  }
+}
+
+mat-grid-tile {
+  background-size: 100%;
+  //background-color: rgba(160,147,141,0.49);
+}
