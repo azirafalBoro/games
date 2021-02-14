@@ -8,6 +8,7 @@ import {error} from 'selenium-webdriver';
   providedIn: 'root'
 })
 export class GameApiService {
+  private lastCorrectCategory: string | undefined;
   private cache: any;
   private cachedObservable: Observable<any> | undefined;
   private cacheSlug: any;
@@ -65,11 +66,17 @@ export class GameApiService {
 
   getGamesBySlug(slug: string): Observable<any> {
     let observable: Observable<any>;
-    if (this.cacheSlug) {
+    console.log('this.lastCorrectCategory', this.lastCorrectCategory);
+    console.log('this.cacheSlug', this.cacheSlug);
+    console.log('this.cachedObservableSlug', this.cachedObservableSlug);
+    if (this.cacheSlug && this.lastCorrectCategory === slug) {
+      console.log('A');
       observable = of(this.cacheSlug);
     }  else if (this.cachedObservableSlug) {
+      console.log('B');
       observable = this.cachedObservableSlug;
     } else {
+      console.log('C');
       this.cachedObservableSlug = this.http.get<any>(this.baseUrl + 'game-categories/' + slug + this.baseParameters)
         .pipe(
           tap(res => this.cacheSlug = res),

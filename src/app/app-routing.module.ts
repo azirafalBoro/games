@@ -10,10 +10,7 @@ const routes: Routes = [
   },
   { path: 'game',
     component: GamePlayWindowComponent,
-  },
-  { path: 'game/:gameName',
-    component: GamePlayWindowComponent,
-  },
+  }
 ];
 
 @NgModule({
