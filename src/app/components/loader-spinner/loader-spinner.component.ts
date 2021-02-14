@@ -13,7 +13,6 @@ export class LoaderSpinnerComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameApiService.isLoading.subscribe((v) => {
-      console.log(v);
       this.loading = v;
     });
   }

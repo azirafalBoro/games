@@ -70,7 +70,7 @@ export class GamesComponent implements OnInit {
   }
 
   goPlayGame(game: any): void {
-    this.chosenGame.setMessage(game);
+    this.chosenGame.setChosenGame(game);
     this.router.navigate(['/game']);
   }
 }

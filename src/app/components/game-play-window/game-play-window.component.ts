@@ -16,7 +16,7 @@ export class GamePlayWindowComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.game = this.chosenGame.getChosenGameName();
-    this.paramsSubscriptions = this.chosenGame.getMessage().subscribe(
+    this.paramsSubscriptions = this.chosenGame.getChosenGame().subscribe(
       (message: any) => {
         if (message) {
           this.game = message;

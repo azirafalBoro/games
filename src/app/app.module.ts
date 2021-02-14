@@ -17,6 +17,8 @@ import {LazyDirective} from './directives/lazy.directive';
 import { ImageErrorDirective } from './directives/image-error.directive';
 import { GamePlayWindowComponent } from './components/game-play-window/game-play-window.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatProgressSpinnerModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ScrollingModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }

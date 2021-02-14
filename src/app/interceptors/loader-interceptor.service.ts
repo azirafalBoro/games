@@ -1,12 +1,3 @@
-// import { Injectable } from '@angular/core';
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class LoaderInterceptorService {
-//
-//   constructor() { }
-// }
 import { Injectable } from '@angular/core';
 import {
   HttpResponse,
@@ -17,7 +8,6 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {GameApiService} from '../services/game-api.service';
-// import { LoaderService } from '../services/loader.service';
 
 @Injectable()
 export class LoaderInterceptorService implements HttpInterceptor {
@@ -36,9 +26,6 @@ export class LoaderInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     this.requests.push(req);
-
-    console.log('No of requests--->' + this.requests.length);
-
     this.gameApiService.isLoading.next(true);
     return Observable.create((observer: any) => {
       const subscription = next.handle(req)
@@ -50,7 +37,6 @@ export class LoaderInterceptorService implements HttpInterceptor {
             }
           },
           err => {
-            // alert('error' + err);
             this.removeRequest(req);
             observer.error(err);
           },
@@ -58,7 +44,6 @@ export class LoaderInterceptorService implements HttpInterceptor {
             this.removeRequest(req);
             observer.complete();
           });
-      // remove request from queue when cancelled
       return () => {
         this.removeRequest(req);
         subscription.unsubscribe();
