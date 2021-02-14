@@ -10,13 +10,15 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoaderInterceptorService} from './interceptors/loader-interceptor.service';
 import {MatButtonModule} from '@angular/material/button';
 import {LazyDirective} from './directives/lazy.directive';
 import { ImageErrorDirective } from './directives/image-error.directive';
+import { GamePlayWindowComponent } from './components/game-play-window/game-play-window.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { ImageErrorDirective } from './directives/image-error.directive';
     GamesComponent,
     LoaderSpinnerComponent,
     LazyDirective,
-    ImageErrorDirective
+    ImageErrorDirective,
+    GamePlayWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,9 @@ import { ImageErrorDirective } from './directives/image-error.directive';
     MatIconModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatBadgeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }
