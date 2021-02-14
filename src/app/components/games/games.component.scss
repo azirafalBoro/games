@@ -1,5 +1,4 @@
 .list-component {
-  //background-color: rgba(81,66,255,0.95);
   .filter-block {
     margin-bottom: 50px;
 
@@ -13,7 +12,6 @@
       opacity: 0.9;
       transition: 0.3s ease;
       cursor: pointer;
-      //background-color: rgba(60,148,251,0.98);
 
       .view-info {
         display: flex;
@@ -22,14 +20,12 @@
         align-content: center;
 
         .game-img {
-          border-radius: 10px;
+          border-radius: 3px;
+          box-shadow: 10px 5px 5px black;
         }
 
         .game-name {
           text-align: center;
-          //position: relative;
-          //font-size: medium;
-          //top: 35%;
         }
       }
     }
@@ -39,48 +35,4 @@
       transform: scale(1.5, 1.5);
     }
   }
-}
-//.filter-block {
-//  margin-bottom: 50px;
-//
-//  mat-form-field {
-//    margin-right: 50px;
-//  }
-//}
-//
-//.games-box {
-//  .game-box {
-//    opacity: 0.9;
-//    transition: 0.3s ease;
-//    cursor: pointer;
-//    //background-color: rgba(60,148,251,0.98);
-//
-//      .view-info {
-//        display: flex;
-//        flex-direction: column;
-//        justify-content: center;
-//        align-content: center;
-//
-//        .game-img {
-//          border-radius: 10px;
-//        }
-//
-//        .game-name {
-//          text-align: center;
-//          //position: relative;
-//          //font-size: medium;
-//          //top: 35%;
-//      }
-//    }
-//  }
-//
-//  .game-box:hover {
-//    opacity: 1;
-//    transform: scale(1.5, 1.5);
-//  }
-//}
-
-mat-grid-tile {
-  //background-size: 100%;
-  //background-color: rgba(160,147,141,0.49);
 }

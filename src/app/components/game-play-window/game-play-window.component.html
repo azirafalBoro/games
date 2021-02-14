@@ -1,6 +1,7 @@
 <div class="game-play-block">
   <div class="game-window" *ngIf="game; else please">
     <span class="game-message">Play your game: {{game.name}}</span>
+    <span class="material-icons play-icon">play_circle_outline</span>
   </div>
   <button class="go-back" [routerLink]="''"  mat-button>Back</button>
 </div>

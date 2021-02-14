@@ -2,18 +2,18 @@
   <div class="filter-block">
     <mat-form-field class="example-form-field">
       <mat-label>Chose game categories</mat-label>
-      <input #categories matInput type="text" [(ngModel)]="gameCategories" (ngModelChange)="changedCategory($event)">
+      <input matInput type="text" [(ngModel)]="gameCategories" (ngModelChange)="changedInputs($event)">
     </mat-form-field>
     <mat-form-field class="example-form-field">
       <mat-label>Search game</mat-label>
-      <input #name matInput type="text" [(ngModel)]="gameName" (ngModelChange)="changedName($event)">
+      <input matInput type="text" [(ngModel)]="gameName" (ngModelChange)="changedInputs($event)">
     </mat-form-field>
   </div>
   <app-loader-spinner></app-loader-spinner>
   <div class="list-of-user" *ngIf="(games$ | async) as games">
     <div *ngIf="games.length">
       <mat-grid-list class="games-box" [cols]="breakpoint" rowHeight="1:1" (window:resize)="onResize($event)">
-          <ng-container *ngFor="let game of games; trackBy: trackByMethod">
+          <ng-container *ngFor="let game of games; trackBy:trackByMethod">
             <mat-grid-tile class="game-box" (click)="goPlayGame(game)">
               <div class="view-info">
                 <img appDefault appLazy class="game-img lazy img" [src]="game.thumbnails.legacy" default="https://via.placeholder.com/150" layout-fill loading="lazy" alt=""/>

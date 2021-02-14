@@ -37,11 +37,17 @@ export class GameApiService {
 
   getGames(): Observable<any> {
     let observable: Observable<any>;
+    console.log('begin begin begin begin begin begin begin begin begin begin ');
+    console.log('this.cache', this.cache);
+    console.log('this.cachedObservable', this.cachedObservable);
     if (this.cache) {
+      console.log('I');
       observable = of(this.cache);
     }  else if (this.cachedObservable) {
+      console.log('II');
       observable = this.cachedObservable;
     } else {
+      console.log('III');
       this.cachedObservable = this.http.get<any>(this.baseUrl + 'games' + this.baseParameters)
         .pipe(
           tap(res => this.cache = res),
@@ -50,6 +56,9 @@ export class GameApiService {
         );
       observable = this.cachedObservable;
     }
+    console.log('this.cache', this.cache);
+    console.log('this.cachedObservable', this.cachedObservable);
+    console.log('end end end end end end end end end end end end end end end end ');
     return observable;
   }
 
@@ -66,6 +75,8 @@ export class GameApiService {
 
   getGamesBySlug(slug: string): Observable<any> {
     let observable: Observable<any>;
+    console.log('begin begin begin begin begin begin begin begin begin begin ');
+    console.log('slug', slug);
     console.log('this.lastCorrectCategory', this.lastCorrectCategory);
     console.log('this.cacheSlug', this.cacheSlug);
     console.log('this.cachedObservableSlug', this.cachedObservableSlug);
@@ -81,23 +92,30 @@ export class GameApiService {
         .pipe(
           tap(res => this.cacheSlug = res),
           share(),
-          finalize(() => this.cachedObservableSlug = undefined)
+          finalize(() => {
+            this.cachedObservableSlug = undefined;
+            this.lastCorrectCategory = slug;
+          })
         );
       observable = this.cachedObservableSlug;
     }
+    console.log('this.lastCorrectCategory', this.lastCorrectCategory);
+    console.log('this.cacheSlug', this.cacheSlug);
+    console.log('this.cachedObservableSlug', this.cachedObservableSlug);
+    console.log('end end end end end end end end end end end end end end end end ');
     return observable;
   }
 
-  private handleError(err: HttpErrorResponse): Observable<never> {
-    if (err.error instanceof ErrorEvent) {
-      console.error('An error occurred:', err.error.message);
-    } else {
-      console.error(
-        'Backend returned code ${error.status}, ' +
-        'body was: ${error.error}');
-    }
-
-    return throwError(
-      'Something bad happened; please try again later.');
-  }
+  // private handleError(err: HttpErrorResponse): Observable<never> {
+  //   if (err.error instanceof ErrorEvent) {
+  //     console.error('An error occurred:', err.error.message);
+  //   } else {
+  //     console.error(
+  //       'Backend returned code ${error.status}, ' +
+  //       'body was: ${error.error}');
+  //   }
+  //
+  //   return throwError(
+  //     'Something bad happened; please try again later.');
+  // }
 }

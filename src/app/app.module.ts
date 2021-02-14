@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GamesDashboardComponent } from './components/games-dashboard/games-dashboard.component';
 import { GamesComponent } from './components/games/games.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -23,7 +21,6 @@ import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
   declarations: [
     AppComponent,
-    GamesDashboardComponent,
     GamesComponent,
     LoaderSpinnerComponent,
     LazyDirective,

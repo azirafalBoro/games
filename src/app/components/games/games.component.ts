@@ -26,7 +26,7 @@ export class GamesComponent implements OnInit {
         this.games$ = this.gamesApi.getGamesBySlug(this.gameCategories).pipe(
               map(listOfGames => {
                 if (this.gameName) {
-                  return listOfGames._embedded.games.filter((game: any) => game.name.includes(this.gameName));
+                  return listOfGames._embedded.games.filter((game: any) => game.name.toLowerCase().includes(this.gameName.toLowerCase()));
                 }
                 return listOfGames._embedded.games;
               }),
@@ -35,7 +35,7 @@ export class GamesComponent implements OnInit {
         this.games$ = this.gamesApi.getGames().pipe(
           map(listOfGames => {
             if (this.gameName) {
-              return listOfGames._embedded.games.filter((game: any) => game.name.includes(this.gameName));
+              return listOfGames._embedded.games.filter((game: any) => game.name.toLowerCase().includes(this.gameName.toLowerCase()));
             }
             return listOfGames._embedded.games;
           }),
@@ -48,11 +48,7 @@ export class GamesComponent implements OnInit {
     this.setColumnInGrid(event.target.innerWidth);
   }
 
-  changedCategory(event: any): void {
-    this.listOfGames.next(event);
-  }
-
-  changedName(event: any): void {
+  changedInputs(event: any): void {
     this.listOfGames.next(event);
   }
 

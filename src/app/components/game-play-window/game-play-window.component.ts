@@ -1,5 +1,5 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ChosenGameService} from '../../services/chosen-game.service';
 
@@ -16,19 +16,16 @@ export class GamePlayWindowComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.game = this.chosenGame.getChosenGameName();
-    console.log('GamePlayWindowComponent ngOnInit BEFORE', this.game);
     this.paramsSubscriptions = this.chosenGame.getMessage().subscribe(
       (message: any) => {
         if (message) {
           this.game = message;
         }
       });
-    console.log('GamePlayWindowComponent ngOnInit AFTER', this.game);
   }
 
   ngOnDestroy(): void {
-    // this.paramsSubscriptions.next();
-    // this.paramsSubscriptions.unsubscribe();
+    if (this.paramsSubscriptions) { this.paramsSubscriptions.unsubscribe(); }
   }
 
 }

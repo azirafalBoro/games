@@ -5,15 +5,25 @@
   flex-direction: column;
 
   .game-window {
+    display: flex;
+    flex-direction: column;
     margin: 2% auto auto;
     width: 40vw;
     height: 40vh;
+    min-width: 1vw;
+    min-height: 1vw;
     padding: 5%;
     background-color: #888888;
     text-align: center;
 
     .game-message {
       font-size: 1.7rem;
+      color: white;
+    }
+
+    .play-icon {
+      margin-top: 11%;
+      font-size: 6rem;
       color: white;
     }
   }
