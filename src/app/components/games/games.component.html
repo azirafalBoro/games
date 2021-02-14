@@ -2,7 +2,7 @@
   <div class="filter-block">
     <mat-form-field class="example-form-field">
       <mat-label>Chose game categories</mat-label>
-      <input #categories matInput type="text" [(ngModel)]="gameCategories" (ngModelChange)="changedCategory()">
+      <input #categories matInput type="text" [(ngModel)]="gameCategories" (ngModelChange)="changedCategory($event)">
     </mat-form-field>
     <mat-form-field class="example-form-field">
       <mat-label>Search game</mat-label>

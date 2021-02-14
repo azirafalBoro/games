@@ -1,0 +1,12 @@
+<div class="game-play-block">
+  <div class="game-window" *ngIf="game; else please">
+    <span class="game-message">Play your game: {{game.name}}</span>
+  </div>
+  <button class="go-back" [routerLink]="''"  mat-button>Back</button>
+</div>
+<ng-template #please>
+  <div class="game-window">
+    <span class="game-message">First please chose your game.</span>
+  </div>
+</ng-template>
+

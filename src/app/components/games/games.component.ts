@@ -1,7 +1,7 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {GameApiService} from '../../services/game-api.service';
-import {catchError, debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {catchError, debounceTime, map} from 'rxjs/operators';
 import {ChosenGameService} from '../../services/chosen-game.service';
 import {Router} from '@angular/router';
 
@@ -13,61 +13,47 @@ import {Router} from '@angular/router';
 export class GamesComponent implements OnInit {
   gameCategories = '';
   gameName = '';
-  modelChanged = new Subject();
-  modelChangedName = new BehaviorSubject('');
+  listOfGames = new BehaviorSubject('');
   games$: Observable<any> | undefined;
   breakpoint = 8;
   constructor(private gamesApi: GameApiService, private chosenGame: ChosenGameService, private router: Router) { }
 
   ngOnInit(): void {
     this.setColumnInGrid(window.innerWidth);
-    this.modelChanged
-      .pipe(
-        debounceTime(300))
-      .subscribe(() => {
-        console.log('getGamesBySlug request Slug Slug Slug Slug Slug Slug Slug Slug Slug Slug Slug');
-        // debugger
+    this.listOfGames.pipe(
+      debounceTime(300)).subscribe(() => {
+      if ((this.gameCategories && this.gameName) || (this.gameCategories && !this.gameName)) {
         this.games$ = this.gamesApi.getGamesBySlug(this.gameCategories).pipe(
+              map(listOfGames => {
+                if (this.gameName) {
+                  return listOfGames._embedded.games.filter((game: any) => game.name.includes(this.gameName));
+                }
+                return listOfGames._embedded.games;
+              }),
+              catchError(() => []));
+      } else {
+        this.games$ = this.gamesApi.getGames().pipe(
           map(listOfGames => {
-            // debugger
             if (this.gameName) {
               return listOfGames._embedded.games.filter((game: any) => game.name.includes(this.gameName));
             }
-
             return listOfGames._embedded.games;
           }),
           catchError(() => []));
-      });
-
-    this.modelChangedName
-      .pipe(
-        debounceTime(300))
-      .subscribe(() => {
-        console.log('getGames request games games games games games games games games games games');
-        this.games$ = this.gamesApi.getGames().pipe(
-            map(listOfGames => {
-              // debugger
-              if (this.gameName) {
-                return listOfGames._embedded.games.filter((game: any) => game.name.includes(this.gameName));
-              }
-
-              return listOfGames._embedded.games;
-            }),
-            catchError(() => [])
-          );
-      });
+      }
+    });
   }
 
   onResize(event: any): void {
     this.setColumnInGrid(event.target.innerWidth);
   }
 
-  changedCategory(): void {
-    this.modelChanged.next();
+  changedCategory(event: any): void {
+    this.listOfGames.next(event);
   }
 
   changedName(event: any): void {
-    this.modelChangedName.next(event);
+    this.listOfGames.next(event);
   }
 
   private setColumnInGrid(width: number): void {
