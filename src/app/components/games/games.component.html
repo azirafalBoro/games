@@ -4,11 +4,9 @@
     <div *ngIf="games.length">
       <mat-grid-list class="games-box" [cols]="breakpoint" rowHeight="1:1" (window:resize)="onResize($event)">
           <ng-container *ngFor="let game of games; trackBy: trackByMethod">
-<!--            [ngStyle]="{background: 'url(https:' + game.thumbnails.legacy + ') no-repeat center'}"-->
             <mat-grid-tile class="game-box">
               <div class="view-info">
-<!--                <img class="game-img lazy" src="../../../images/t-rex-game.jpg" layout-fill/>-->
-                <img class="game-img lazy" src="{{game.thumbnails.legacy}}" layout-fill/>
+                <img appDefault appLazy class="game-img lazy img" [src]="game.thumbnails.legacy" default="https://via.placeholder.com/150" layout-fill loading="lazy" alt=""/>
                 <span class="game-name">{{game.name}}</span>
               </div>
             </mat-grid-tile>

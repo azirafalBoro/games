@@ -15,13 +15,17 @@ import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinn
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoaderInterceptorService} from './interceptors/loader-interceptor.service';
 import {MatButtonModule} from '@angular/material/button';
+import {LazyDirective} from './directives/lazy.directive';
+import { ImageErrorDirective } from './directives/image-error.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     GamesDashboardComponent,
     GamesComponent,
-    LoaderSpinnerComponent
+    LoaderSpinnerComponent,
+    LazyDirective,
+    ImageErrorDirective
   ],
   imports: [
     BrowserModule,

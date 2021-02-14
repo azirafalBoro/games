@@ -13,42 +13,10 @@ export class GamesComponent implements OnInit, OnChanges {
   @Input() searchGame: string | undefined;
   games$: Observable<any> | undefined;
   breakpoint = 8;
-  // isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
   constructor(private gamesApi: GameApiService) { }
 
   ngOnInit(): void {
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 12;
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const lazyloadImages = document.querySelectorAll('img.lazy');
-      let lazyloadThrottleTimeout: any;
-
-      function lazyload(): void {
-        if (lazyloadThrottleTimeout) {
-          clearTimeout(lazyloadThrottleTimeout);
-        }
-
-        lazyloadThrottleTimeout = setTimeout(() => {
-          const scrollTop = window.pageYOffset;
-          lazyloadImages.forEach((img: any) => {
-            if (img.offsetTop < (window.innerHeight + scrollTop)) {
-              img.src = img.dataset.src;
-              img.classList.remove('lazy');
-            }
-          });
-          if (lazyloadImages.length === 0) {
-            document.removeEventListener('scroll', lazyload);
-            window.removeEventListener('resize', lazyload);
-            window.removeEventListener('orientationChange', lazyload);
-          }
-        }, 20);
-      }
-
-      document.addEventListener('scroll', lazyload);
-      window.addEventListener('resize', lazyload);
-      window.addEventListener('orientationChange', lazyload);
-    });
+    this.setColumnInGrid(window.innerWidth);
   }
 
   ngOnChanges(): void {
@@ -79,13 +47,16 @@ export class GamesComponent implements OnInit, OnChanges {
   }
 
   onResize(event: any): void {
-    console.log('test', event.target.innerWidth);
+    this.setColumnInGrid(event.target.innerWidth);
+  }
+
+  private setColumnInGrid(width: number): void {
     let columns = 8;
-    if (event.target.innerWidth <= 600) {
+    if (width <= 600) {
       columns = 2;
-    } else if (event.target.innerWidth <= 1200) {
+    } else if (width <= 1200) {
       columns = 4;
-    } else if (event.target.innerWidth <= 1600) {
+    } else if (width <= 1600) {
       columns = 6;
     }
 
